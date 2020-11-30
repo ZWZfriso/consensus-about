@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://github.com/ZWZfriso</id>
-    <title>Gridea</title>
-    <updated>2020-11-30T09:05:21.810Z</updated>
+    <title>All about friso</title>
+    <updated>2020-11-30T09:22:09.293Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://github.com/ZWZfriso"/>
     <link rel="self" href="https://github.com/ZWZfriso/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>Daily for recording</subtitle>
     <logo>https://github.com/ZWZfriso/images/avatar.png</logo>
     <icon>https://github.com/ZWZfriso/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, All about friso</rights>
     <entry>
         <title type="html"><![CDATA[About my new blog record]]></title>
         <id>https://github.com/ZWZfriso/post/about-my-new-blog-record/</id>
@@ -18,6 +18,7 @@
         <updated>2020-11-30T09:03:12.000Z</updated>
         <content type="html"><![CDATA[<p>2020.11.30<br>
 After the first topic report, there are something determined in my mind that push me gogo.</p>
+<p>There is a flag for me in the following daily life that is to keep update one thing, like a paper reading, a myself conclusion or amazing thing in other field.</p>
 ]]></content>
     </entry>
 </feed>
