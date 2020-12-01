@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>About my new blog record | All about friso</title>
+<title>How to Leak a Secret | All about friso</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,10 +18,16 @@
 
 
 
-    <meta name="description" content="2020.11.30
-After the first topic report, there are something determined in my mind that push me gogo.
-There is a flag fo..." />
-    <meta name="keywords" content="杂述" />
+    <meta name="description" content="一、起源
+从有中心管理者的群签名演化而来，变成现在的无中心管理者的环签名。
+二、定义
+环：
+一组可能的签名者，实际产生签名的环成员成为签名者，其他称为非签名者。
+
+其中，环成员与公共密钥PK相关联，对应密钥为SK。
+
+签名：ring-sig..." />
+    <meta name="keywords" content="环签名" />
   </head>
   <body>
     <div id="app" class="main">
@@ -90,27 +96,61 @@ There is a flag fo..." />
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">About my new blog record</h2>
-            <div class="post-date">2020-11-30</div>
-            
-              <div class="feature-container" style="background-image: url('https://github.com/ZWZfriso/post-images/about-my-new-blog-record.jpg')">
-              </div>
+            <h2 class="post-title">How to Leak a Secret</h2>
+            <div class="post-date">2020-12-01</div>
             
             <div class="post-content" v-pre>
-              <p>2020.11.30<br>
-After the first topic report, there are something determined in my mind that push me gogo.</p>
-<p>There is a flag for me in the following daily life that is to keep update one thing, like a paper reading, a myself conclusion or amazing thing in other field.</p>
+              <h1 id="一-起源">一、起源</h1>
+<p>从有中心管理者的群签名演化而来，变成现在的无中心管理者的环签名。</p>
+<h1 id="二-定义">二、定义</h1>
+<h3 id="环">环：</h3>
+<pre><code>一组可能的签名者，实际产生签名的环成员成为签名者，其他称为非签名者。
+</code></pre>
+<p>其中，环成员与公共密钥PK相关联，对应密钥为SK。</p>
+<ul>
+<li>签名：<strong>ring-sign(m, P1, P2, ..., Pr, s, Ss)</strong> 将消息m产生出环签名α。其中，r个环成员的公钥为P1, P2, P3, ..., Pr，组成了密钥Ss。</li>
+<li>验证：<strong>ring-verify(m, α)</strong>，输出true或false。</li>
+</ul>
+<h3 id="特点">特点：</h3>
+<pre><code>签名者不需要其他环成员的知识、帮助及其他；
+不同成员使用不同的、独立公钥签名方案，有不同的密钥和签名大小；
+验证者满足通常的坚固性(soundness)和完备性(completeness)；
+</code></pre>
+<h3 id="注意">注意：</h3>
+<pre><code>匿名性有限与无限问题：？
+</code></pre>
+<h3 id="环签名优势">环签名优势：</h3>
+<pre><code>匿名性：可以在不剥去“身份”或“来源”的情况下，隐藏个人
+高效率
+</code></pre>
+<h1 id="三-环签名方案">三、环签名方案</h1>
+<h2 id="1rsa版本">1.RSA版本</h2>
+<p>Alice希望在r有个环成员情况下给消息m签名As，1≤s≤r，其中，全部环成员都是用RSA来执行签名。</p>
+<h3 id="rsa-trap-door-permutationsrsa门限排列">RSA Trap-Door Permutations（RSA门限排列）</h3>
+<h3 id="对称加密">对称加密</h3>
+<h3 id="哈希函数">哈希函数</h3>
+<h2 id="2rabin版本">2.Rabin版本</h2>
+<h1 id="四-应用">四、应用</h1>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://github.com/ZWZfriso/tag/-eTFwnzlZ/" class="tag">
-                    杂述
+                  <a href="https://github.com/ZWZfriso/tag/d8FBud9A7/" class="tag">
+                    环签名
                   </a>
                 
               </div>
             
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://github.com/ZWZfriso/post/about-my-new-blog-record/">
+                  <h3 class="post-title">
+                    About my new blog record
+                  </h3>
+                </a>
+              </div>
             
 
             
