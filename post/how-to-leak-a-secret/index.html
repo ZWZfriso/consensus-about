@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://github.com/ZWZfriso/favicon.ico?v=1606795516808">
+<link rel="shortcut icon" href="https://github.com/ZWZfriso/favicon.ico?v=1606816941414">
 <link rel="stylesheet" href="https://github.com/ZWZfriso/styles/main.css">
 
 
@@ -18,14 +18,14 @@
 
 
 
-    <meta name="description" content="一、起源
+    <meta name="description" content="2001，环签名概念正式定义
+
+一、起源
 从有中心管理者的群签名演化而来，变成现在的无中心管理者的环签名。
 二、定义
-环：
-一组可能的签名者，实际产生签名的环成员成为签名者，其他称为非签名者。
-其中，环成员与公共密钥PK相关联，对应密钥为SK。
-
-签名：ring-sign..." />
+环：一组可能的签名者
+环成员中实际产生签名的称为签名者，其他称为非签名者。
+其中，环成员与公共密钥PK相关联，对应密钥为S..." />
     <meta name="keywords" content="环签名" />
   </head>
   <body>
@@ -35,7 +35,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://github.com/ZWZfriso">
-        <img src="https://github.com/ZWZfriso/images/avatar.png?v=1606795516808" class="site-logo">
+        <img src="https://github.com/ZWZfriso/images/avatar.png?v=1606816941414" class="site-logo">
         <h1 class="site-title">All about friso</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -99,25 +99,25 @@
             <div class="post-date">2020-12-01</div>
             
             <div class="post-content" v-pre>
-              <h1 id="一-起源">一、起源</h1>
+              <p>2001，环签名概念正式定义</p>
+<!-- more -->
+<h1 id="一-起源">一、起源</h1>
 <p>从有中心管理者的群签名演化而来，变成现在的无中心管理者的环签名。</p>
 <h1 id="二-定义">二、定义</h1>
-<h3 id="环">环：</h3>
-<p>一组可能的签名者，<em>实际产生签名的环成员成为签名者</em>，其他称为非签名者。<br>
+<h3 id="环一组可能的签名者">环：一组可能的签名者</h3>
+<p>环成员中<em>实际产生签名的称为签名者</em>，其他称为非签名者。<br>
 其中，环成员与公共密钥PK相关联，对应密钥为SK。</p>
 <ul>
-<li>签名：<strong>ring-sign(m, P1, P2, ..., Pr, s, Ss)</strong> 将消息m产生出环签名α。其中，r个环成员的公钥为P1, P2, P3, ..., Pr，组成了密钥Ss。</li>
-<li>验证：<strong>ring-verify(m, α)</strong>，输出true或false。</li>
+<li>签名：<strong>ring-sign(m, P1, P2, ..., Pr, s, Ss)</strong> 将消息m产生出环签名σ。其中，r个环成员的公钥为P1, P2, P3, ..., Pr，组成了密钥Ss。</li>
+<li>验证：<strong>ring-verify(m, σ)</strong>，输出true或false。</li>
 </ul>
 <h3 id="特点">特点：</h3>
+<p>自由建立：</p>
 <ul>
 <li>签名者不需要其他环成员的知识、帮助及其他；</li>
 <li>不同成员使用不同的、独立公钥签名方案，有不同的密钥和签名大小；</li>
 <li>验证者满足通常的坚固性(soundness)和完备性(completeness)；</li>
-</ul>
-<h3 id="注意">注意：</h3>
-<ul>
-<li>匿名性有限与无限问题：？</li>
+<li>匿名性限制（签名者模糊），可以做到可计算或者无条件，这里提供无条件匿名</li>
 </ul>
 <h3 id="环签名优势">环签名优势：</h3>
 <ul>
@@ -126,10 +126,34 @@
 </ul>
 <h1 id="三-环签名方案">三、环签名方案</h1>
 <h2 id="1rsa版本">1.RSA版本</h2>
-<p>Alice希望在r有个环成员情况下给消息m签名As，1≤s≤r，其中，全部环成员都是用RSA来执行签名。</p>
+<p>设Alice在r有个环成员情况下给消息m签名称为As，1≤s≤r，其中，全部环成员都是用RSA来执行签名。</p>
 <h3 id="rsa-trap-door-permutationsrsa门限排列">RSA Trap-Door Permutations（RSA门限排列）</h3>
+<p>每个环成员A<sub>i</sub>都有RSA公钥<strong>P<sub>i</sub>=(ni, ei)</strong>，这可以知道门限总共排列Z<sub>ni</sub>中的某一排列f<sub>i</sub>公式为：<strong>f<sub>i</sub>(x)=x<sup>(ei)</sup>(mod ni)</strong>，并且只有A<sub>i</sub>才能够利用上述公式快速计算f<sub>i</sub><sup>-1</sup>。<br>
+<img src="https://github.com/ZWZfriso/post-images/1606810484094.png" alt="" loading="lazy"></p>
+<p>不同环成员的RSA门限排列对应不同大小的域，因此需要扩展门限排列作为它们的公共域{0,1}<sup>b</sup>，它有2<sup>b</sup>远大于ni。<br>
+对于Z<sub>ni</sub>的f<sub>i</sub>，扩展门限排列g<sub>i</sub>公式为：</p>
+<ul>
+<li>当(qi+1)*ni≤2^b时，<code>gi(m)=qi ni+fi(ri)</code>；其他时候，<code>gi(m)=m</code>。</li>
+</ul>
+<p>直观上，<strong>g<sub>i</sub>的定义是利用f<sub>i</sub>对m的ni元表示的低阶数字进行操作，而保持高阶数字不变</strong>。<br>
+例外情况是：当这可能导致结果大于2<sup>b-1</sup>时，在这种情况下m是不变的。如果我们选择一个足够大的b(例如，比ni的任何一个都大160位)，那么一个随机选择的m被扩展的g<sub>i</sub>保持不变的机会就变得可以忽略不计了。（一种我们不需要的更强但代价更高的方法，将使用g<sub>i</sub>'(m)=g((2<sup>b</sup>-1)-g<sub>i</sub>(m))替代g<sub>i</sub>(m)投入。）函数g<sub>i</sub>是一个基于{0, 1}<sup>b</sup>的明确排列，它是一个单向的活门排列，因为只有知道如何逆f<sub>i</sub>的人可以有效地求g<sub>i</sub>的逆。</p>
 <h3 id="对称加密">对称加密</h3>
+<p>我们假设存在一个公开定义的对称加密算法E，对于任何长度为 l 的密钥k, 函数Ek是对b位字符串的排列。这里我们使用随机(排列)oracle模型，来假定各方访问oracle提供真正随机的新查询的答案形式：E<sub>k</sub>(x)和E<sub>k</sub><sup>-1</sup>(y)，只提供了和他们一致的之前的答案和Ek排列的需求(如见[7])。</p>
 <h3 id="哈希函数">哈希函数</h3>
+<p>我们假设存在一个公开定义的抗冲突哈希函数h，它将任意输入映射为长度为I的字符串，这些字符串用作E的密钥。我们将h建模为一个随机的oracle。(因为h不必是一种排列，不同的查询可能有相同的答案，我们将不允许&quot;h<sup>-1</sup>&quot;查询。)</p>
+<h3 id="结合函数">结合函数</h3>
+<ul>
+<li>结合函数：<strong>C<sub>k,v</sub>(y1, y2, ..., yr)</strong></li>
+<li>输入：固定值k, v, 和属于{0, 1}<sup>b</sup>的y1, y2, ..., yr。</li>
+<li>输出：z属于{0, 1}<sup>b</sup></li>
+</ul>
+<p><strong>性质：</strong></p>
+<ul>
+<li>每个输入都是排列中的：对于每个s、其他yi的输入，函数C<sub>k,v</sub>是一个从ys到z的一一映射</li>
+<li>任意单输入都是有效的：对于每个s、b位的z、除ys的其他yi，都有可能为ys有效地找到一个b位值，如 <strong>C<sub>k,v</sub>(y1, y2, ..., yr) = z</strong>。</li>
+<li>所有无门限输入，处理验证等式都不可行：已知k、v、z，解<strong>C<sub>k,v</sub>(g1(x1), g2(x2), ..., gr(xr))=z</strong>不可行。</li>
+</ul>
+<p>异或操作⊕就符合这个函数：<strong>C<sub>k,v</sub>(y1, y2, ..., yr)=y1⊕y2⊕...⊕yr</strong>。</p>
 <h2 id="2rabin版本">2.Rabin版本</h2>
 <h1 id="四-应用">四、应用</h1>
 

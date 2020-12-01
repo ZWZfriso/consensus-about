@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://github.com/ZWZfriso</id>
     <title>All about friso</title>
-    <updated>2020-12-01T04:05:25.948Z</updated>
+    <updated>2020-12-01T10:02:26.194Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://github.com/ZWZfriso"/>
     <link rel="self" href="https://github.com/ZWZfriso/atom.xml"/>
@@ -16,39 +16,9 @@
         <link href="https://github.com/ZWZfriso/post/how-to-leak-a-secret/">
         </link>
         <updated>2020-12-01T02:21:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="一-起源">一、起源</h1>
-<p>从有中心管理者的群签名演化而来，变成现在的无中心管理者的环签名。</p>
-<h1 id="二-定义">二、定义</h1>
-<h3 id="环">环：</h3>
-<p>一组可能的签名者，<em>实际产生签名的环成员成为签名者</em>，其他称为非签名者。<br>
-其中，环成员与公共密钥PK相关联，对应密钥为SK。</p>
-<ul>
-<li>签名：<strong>ring-sign(m, P1, P2, ..., Pr, s, Ss)</strong> 将消息m产生出环签名α。其中，r个环成员的公钥为P1, P2, P3, ..., Pr，组成了密钥Ss。</li>
-<li>验证：<strong>ring-verify(m, α)</strong>，输出true或false。</li>
-</ul>
-<h3 id="特点">特点：</h3>
-<ul>
-<li>签名者不需要其他环成员的知识、帮助及其他；</li>
-<li>不同成员使用不同的、独立公钥签名方案，有不同的密钥和签名大小；</li>
-<li>验证者满足通常的坚固性(soundness)和完备性(completeness)；</li>
-</ul>
-<h3 id="注意">注意：</h3>
-<ul>
-<li>匿名性有限与无限问题：？</li>
-</ul>
-<h3 id="环签名优势">环签名优势：</h3>
-<ul>
-<li>匿名性：可以在不剥去“身份”或“来源”的情况下，隐藏个人</li>
-<li>高效率</li>
-</ul>
-<h1 id="三-环签名方案">三、环签名方案</h1>
-<h2 id="1rsa版本">1.RSA版本</h2>
-<p>Alice希望在r有个环成员情况下给消息m签名As，1≤s≤r，其中，全部环成员都是用RSA来执行签名。</p>
-<h3 id="rsa-trap-door-permutationsrsa门限排列">RSA Trap-Door Permutations（RSA门限排列）</h3>
-<h3 id="对称加密">对称加密</h3>
-<h3 id="哈希函数">哈希函数</h3>
-<h2 id="2rabin版本">2.Rabin版本</h2>
-<h1 id="四-应用">四、应用</h1>
+        <summary type="html"><![CDATA[<p>2001，环签名概念正式定义</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>2001，环签名概念正式定义</p>
 ]]></content>
     </entry>
     <entry>
@@ -57,9 +27,5 @@
         <link href="https://github.com/ZWZfriso/post/about-my-new-blog-record/">
         </link>
         <updated>2020-11-30T09:03:12.000Z</updated>
-        <content type="html"><![CDATA[<p>2020.11.30<br>
-After the first topic report, there are something determined in my mind that push me gogo.</p>
-<p>There is a flag for me in the following daily life that is to keep update one thing, like a paper reading, a myself conclusion or amazing thing in other field.</p>
-]]></content>
     </entry>
 </feed>
