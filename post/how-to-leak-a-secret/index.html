@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://github.com/ZWZfriso/favicon.ico?v=1607433464624">
+<link rel="shortcut icon" href="https://github.com/ZWZfriso/favicon.ico?v=1607435695989">
 <link rel="stylesheet" href="https://github.com/ZWZfriso/styles/main.css">
 
 
@@ -35,7 +35,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://github.com/ZWZfriso">
-        <img src="https://github.com/ZWZfriso/images/avatar.png?v=1607433464624" class="site-logo">
+        <img src="https://github.com/ZWZfriso/images/avatar.png?v=1607435695989" class="site-logo">
         <h1 class="site-title">All about friso</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -154,6 +154,50 @@
 <li>所有无门限输入，处理验证等式都不可行：已知k、v、z，解<strong>C<sub>k,v</sub>(g1(x1), g2(x2), ..., gr(xr))=z</strong>不可行。</li>
 </ul>
 <p>异或操作⊕就符合这个函数：<strong>C<sub>k,v</sub>(y1, y2, ..., yr)=y1⊕y2⊕...⊕yr</strong>。</p>
+<h3 id="组合函数的例子">组合函数的例子</h3>
+<ol>
+<li>异或操作符：<br>
+- <strong>C k,v(y1, y2, ..., yr)=y1⊕y2⊕...⊕yr</strong><br>
+- yi=gi(xi)（xi随机）子集的异或很高可能是目标z【<u>z是yi子集的异或</u>】<br>
+- 存在问题：当r足够大时可以用线性代数求解，用yi的随机子集即可</li>
+<li>改进的异或操作符：<br>
+- 为克服线性代数的随机值可解的问题，为每个环成员i选择2个随机值xi'和xi''，计算yi'=gi(xi')和yi''=gi(xi'')，定义yi'''=yi'⊕yi''，得到z'=z⊕y1'⊕y2',...⊕yr'。<br>
+- <strong>yi'''=yi'⊕yi''=gi(xi')⊕gi(xi'')</strong> ，其值取决于(yi', yi'')的选取。【<u>z'是yi'''子集的异或</u>】<br>
+- 存在问题：如果xi'和xi''相关，不用求门限排列的逆就能解出验证等式</li>
+<li>其他的自然组合问题<br>
+- 额外mod 2<sup>b，如：**gi(xi)=xi</sup>3(mod ni)** ，其中ni是b位的。<br>
+- 因为任何非负整数z可以用9个非负整数的立方和表示，xi<sup>3比z略短，它们的值可能不会受xi</sup>3(mod ni)的影响，故而不用求逆就可以解出验证等式为(x1^3 mod n1)+(x2^3 mod n2)...+(x9^3 mod n9)=z(mod 2^b)<br>
+- 存在问题：验证等式太容易被解出</li>
+</ol>
+<h3 id="本文提出的组合函数">本文提出的组合函数</h3>
+<ol>
+<li>基本概念<br>
+- <strong>C k,v(y1,y2,...,yr)=Ek(yr⊕Ek(yr-1⊕Ek(yr-2⊕Ek(...⊕Ek(y1⊕v)...))))</strong><br>
+<img src="https://github.com/ZWZfriso/post-images/1607435645028.png" alt="" loading="lazy"><br>
+- <strong>性质</strong>：<br>
+- 每个输入都是一个排列，异或、gi与Ek都是排列的；<br>
+- 单一输入都有效，从v开始向右和z向左计算可以唯一地计算任何缺失的yi值；<br>
+- 并且，采用哈希函数选取对称密钥，使得输出z可以等于v，即 <strong><code>C k,v(y1,y2,...,yr) = v</code></strong> ，这使得加密后弯成一个环（v=0是最紧凑的环）；</li>
+<li>生成签名：<br>
+- <strong>输入</strong>：消息m，密钥Ss，公钥顺序P1, P2, ... Pr。<br>
+- <strong>输出</strong>：签名<br>
+- <strong>步骤</strong>：<br>
+1. 签名者计算消息的哈希作为<strong>对称密钥</strong>：k=h(m)或k=h(m, P1, P2, ...Pr)，后者增加了难度；<br>
+2. 签名者从{0, 1}^b中随即均匀<strong>选取初始值v</strong>（glue value）；<br>
+3. 签名者为其他成员从{0, 1)^b中均匀且独立地随机选取xi，且i≠s，计算<strong>yi=gi(xi)</strong> ；<br>
+4. 签名者为<strong>ys</strong>计算C k,v(y1,y2,...,yr)，给定其他输入的任意值，ys存在唯一值满足方程；<br>
+5. 签名者利用门限的知识可以求逆：<strong>xs=gs(ys)^-1</strong>；<br>
+6. 输出签名（2r+1元）：<strong>(P1, P2, ..., Pr; v; x1, x2, ..., xr)</strong></li>
+<li>验证步骤：<br>
+- <strong>输入</strong>：消息m，签名(P1, P2, ..., Pr; v; x1, x2, ..., xr)<br>
+- <strong>输出</strong>：true/false<br>
+- <strong>步骤</strong>：<br>
+1. 运用门限排列计算<strong>yi=gi(xi)</strong>;<br>
+2. 计算加密密钥<strong>k=h(m)</strong>;<br>
+3. 验证签名等式<strong>C k,v(y1,y2,...,yr) = v</strong>，满足则表示签名有效；</li>
+<li>安全性：</li>
+<li></li>
+</ol>
 <h2 id="2rabin版本">2.Rabin版本</h2>
 <h1 id="四-应用">四、应用</h1>
 
